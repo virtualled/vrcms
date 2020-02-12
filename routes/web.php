@@ -15,6 +15,13 @@ Route::get('/', function () {
     return view('admin.index');
 });
 
+// Старинцы доступные только администратору
+Route::group(['middleware' => 'admin'], function (){
+
+
+});
+
+
 Route::resource('admin/sessions', 'AdminSessionsController', ['names'=>[
     'index' =>'admin.sessions.index',
     'create' =>'admin.sessions.create',
@@ -55,3 +62,7 @@ Route::resource('admin/paymentmethods', 'AdminPaymentMethodController', ['names'
 
 ]]);
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
